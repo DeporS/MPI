@@ -64,7 +64,7 @@ void mainLoop()
 		case REST:
 			perc = random() % 100;
 			packet_t *pkt = malloc(sizeof(packet_t));
-			pkt.data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
+			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
 			for (int i = 0; i < size; i++)
 			{
 				if (i != rank)
@@ -72,7 +72,7 @@ void mainLoop()
 					sendPacket(pkt, i, MSG_ROLE); // Wysyłanie roli do wszystkich
 				}
 			}
-			changeState((pkt.data == KILLER) ? KILLER : VICTIM); // Zmiana stanu na KILLER lub VICTIM
+			changeState((pkt->data == KILLER) ? KILLER : VICTIM); // Zmiana stanu na KILLER lub VICTIM
 			break;
 		case VICTIM:
 			// Victim-specific logic here
