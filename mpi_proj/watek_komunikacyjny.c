@@ -37,6 +37,7 @@ void *startKomWatek(void *ptr)
             break;
         case ACK_ROLE:
             debug("Otrzymałem ACK_ROLE od %d\n", pakiet.src);
+            printf("Otrzymałem ACK_ROLE od %d\n", pakiet.src);
             ackCount++;
             break;
         case MSG_VIC:
