@@ -34,6 +34,10 @@
 
 #define ROOT 0
 
+#define REST 0
+#define KILLER 1
+#define VICTIM 2
+
 /* tutaj TYLKO zapowiedzi - definicje w main.c */
 extern int rank;
 extern int size;
