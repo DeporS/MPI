@@ -19,8 +19,8 @@ void *startKomWatek(void *ptr)
         switch (status.MPI_TAG)
         {
         case REQUEST:
-            debug("Ktoś coś prosi. A niech ma!")
-                sendPacket(0, status.MPI_SOURCE, ACK);
+            debug("Ktoś coś prosi. A niech ma!");
+            sendPacket(0, status.MPI_SOURCE, ACK);
             break;
         case ACK:
             debug("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
@@ -36,8 +36,7 @@ void *startKomWatek(void *ptr)
         case ACK_ROLE:
             debug("Otrzymałem ACK_ROLE od %d\n", pakiet.src);
             ackCount++;
-            break;
-        case MSG_VIC:
+        break case MSG_VIC:
             // MSG_VIC-specific logic here
             break;
         case REQ_KILL:
@@ -52,8 +51,7 @@ void *startKomWatek(void *ptr)
         case BEER_TIME:
             // BEER_TIME-specific logic here
             break;
-        default:
-            break;
+            default : break;
         }
     }
 }
