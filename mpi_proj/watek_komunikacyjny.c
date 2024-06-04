@@ -24,6 +24,7 @@ void *startKomWatek(void *ptr)
             break;
         case ACK:
             debug("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
+            printf("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
             ackCount++; /* czy potrzeba tutaj muteksa? Będzie wyścig, czy nie będzie? Zastanówcie się. */
             break;
         case MSG_KILL:
@@ -31,6 +32,7 @@ void *startKomWatek(void *ptr)
             break;
         case MSG_ROLE:
             debug("Otrzymałem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
+            printf("Otrzymałem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
             sendPacket(0, pakiet.src, ACK_ROLE); // Wysyłanie potwierdzenia ACK_ROLE
             break;
         case ACK_ROLE:
