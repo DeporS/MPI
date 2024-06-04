@@ -36,7 +36,8 @@ void *startKomWatek(void *ptr)
         case ACK_ROLE:
             debug("Otrzymałem ACK_ROLE od %d\n", pakiet.src);
             ackCount++;
-        break case MSG_VIC:
+            break;
+        case MSG_VIC:
             // MSG_VIC-specific logic here
             break;
         case REQ_KILL:
@@ -51,7 +52,8 @@ void *startKomWatek(void *ptr)
         case BEER_TIME:
             // BEER_TIME-specific logic here
             break;
-            default : break;
+        default:
+            break;
         }
     }
 }
