@@ -24,6 +24,7 @@ typedef enum
     InWant,
     InSection,
     InFinish,
+    REST,
     VICTIM,
     KILLER,
     WANNAKILL,
