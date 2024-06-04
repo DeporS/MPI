@@ -29,6 +29,14 @@ void *startKomWatek(void *ptr)
         case MSG_KILL:
             // MSG_KILL-specific logic here
             break;
+        case MSG_ROLE:
+            debug("Otrzymałem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
+            sendPacket(0, pakiet.src, ACK_ROLE); // Wysyłanie potwierdzenia ACK_ROLE
+            break;
+        case ACK_ROLE:
+            debug("Otrzymałem ACK_ROLE od %d\n", pakiet.src);
+            ackCount++;
+            break;
         case MSG_VIC:
             // MSG_VIC-specific logic here
             break;

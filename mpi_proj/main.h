@@ -30,6 +30,7 @@
 #define MSG_VIC 10
 #define THE_END 11
 #define BEER_TIME 12
+#define MSG_ROLE 13
 
 #define ROOT 0
 

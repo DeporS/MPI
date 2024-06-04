@@ -61,18 +61,18 @@ void mainLoop()
 		// break;
 		//     }
 		// sleep(SEC_IN_STATE);
-		case InRun:
+		case REST:
 			perc = random() % 100;
-			if (perc < 50)
+			packet_t pkt;
+			pkt.data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
+			for (int i = 0; i < size; i++)
 			{
-				sendPacket(0, MPI_COMM_WORLD, MSG_VIC);
-				changeState(VICTIM);
+				if (i != rank)
+				{
+					sendPacket(&pkt, i, MSG_ROLE); // Wysyłanie roli do wszystkich
+				}
 			}
-			else
-			{
-				sendPacket(0, MPI_COMM_WORLD, MSG_KILL);
-				changeState(KILLER);
-			}
+			changeState((pkt.data == KILLER) ? KILLER : VICTIM); // Zmiana stanu na KILLER lub VICTIM
 			break;
 		case VICTIM:
 			// Victim-specific logic here
