@@ -8,12 +8,12 @@ void insert_student(packet_t pakiet)
     pthread_mutex_lock(&student_list_mutex);
 
     students_list[count] = pakiet;
-    student_count++;
+    count++;
 
     // sortowanie listy studentow po dodaniu nowego studenta
-    for (int i = 0; i < student_count - 1; i++)
+    for (int i = 0; i < count - 1; i++)
     {
-        for (int j = 0; j < student_count - i - 1; j++)
+        for (int j = 0; j < count - i - 1; j++)
         {
             if (students_list[j].ts > students_list[j + 1].ts ||
                 (students_list[j].ts == students_list[j + 1].ts && students_list[j].src > students_list[j + 1].src))
