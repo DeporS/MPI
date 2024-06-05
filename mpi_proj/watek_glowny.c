@@ -79,7 +79,11 @@ void mainLoop()
 			// Victim-specific logic here
 			break;
 		case KILLER:
-			// Killer-specific logic here
+			if (ackCount == size - 1)
+			{
+				changeState(WANNAKILL)
+					printf("Wchodze w stan WANNAKILL!\n");
+			}
 			break;
 		case WANNAKILL:
 			// WANNAKILL-specific logic here
