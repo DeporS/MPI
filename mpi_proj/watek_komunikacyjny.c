@@ -1,22 +1,33 @@
 #include "main.h"
 #include "watek_komunikacyjny.h"
 
-// sortowanie listy studentow po zegarze lamporta i id
-void sort_students_list()
+pthread_mutex_t student_list_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+void insert_student(packet_t pakiet)
 {
-    for (int i = 0; i < count - 1; i++)
+    student_t new_student = {pakiet.ts, pakiet.src, pakiet.data};
+
+    pthread_mutex_lock(&student_list_mutex);
+
+    students_list[student_count] = new_student;
+    student_count++;
+
+    // sortowanie listy studentow po dodaniu nowego studenta
+    for (int i = 0; i < student_count - 1; i++)
     {
-        for (int j = 0; j < count - i - 1; j++)
+        for (int j = 0; j < student_count - i - 1; j++)
         {
             if (students_list[j].ts > students_list[j + 1].ts ||
                 (students_list[j].ts == students_list[j + 1].ts && students_list[j].src > students_list[j + 1].src))
             {
-                packet_t temp = students_list[j];
+                student_t temp = students_list[j];
                 students_list[j] = students_list[j + 1];
                 students_list[j + 1] = temp;
             }
         }
     }
+
+    pthread_mutex_unlock(&student_list_mutex);
 }
 
 /* wątek komunikacyjny; zajmuje się odbiorem i reakcją na komunikaty */
@@ -52,13 +63,8 @@ void *startKomWatek(void *ptr)
             debug("Otrzymałem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
             printf("Otrzymałem rolę %s od %d z zegarem %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src, pakiet.ts);
 
-            // Dodanie do listy
-            if (count < size)
-            {
-                students_list[count] = pakiet;
-                count++;
-                sort_students_list(); // Sortowanie listy
-            }
+            // Dodanie procesu do listy studentów
+            insert_student(pakiet);
 
             sendPacket(0, pakiet.src, ACK_ROLE); // Wysyłanie potwierdzenia ACK_ROLE
             break;

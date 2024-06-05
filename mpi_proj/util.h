@@ -35,6 +35,7 @@ typedef enum
 extern state_t stan;
 extern pthread_mutex_t lamport_clock_mutex;
 extern pthread_mutex_t stateMut;
+extern pthread_mutex_t student_list_mutex;
 
 /* zmiana stanu, obwarowana muteksem */
 void changeState(state_t);
