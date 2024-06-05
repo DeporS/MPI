@@ -5,11 +5,9 @@ pthread_mutex_t student_list_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void insert_student(packet_t pakiet)
 {
-    student_t new_student = {pakiet.ts, pakiet.src, pakiet.data};
-
     pthread_mutex_lock(&student_list_mutex);
 
-    students_list[student_count] = new_student;
+    students_list[count] = new_student;
     student_count++;
 
     // sortowanie listy studentow po dodaniu nowego studenta
@@ -20,7 +18,7 @@ void insert_student(packet_t pakiet)
             if (students_list[j].ts > students_list[j + 1].ts ||
                 (students_list[j].ts == students_list[j + 1].ts && students_list[j].src > students_list[j + 1].src))
             {
-                student_t temp = students_list[j];
+                packet_t temp = students_list[j];
                 students_list[j] = students_list[j + 1];
                 students_list[j + 1] = temp;
             }
