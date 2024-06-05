@@ -7,7 +7,7 @@ void insert_student(packet_t pakiet)
 {
     pthread_mutex_lock(&student_list_mutex);
 
-    students_list[count] = new_student;
+    students_list[count] = pakiet;
     student_count++;
 
     // sortowanie listy studentow po dodaniu nowego studenta
