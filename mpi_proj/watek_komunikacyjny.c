@@ -1,6 +1,24 @@
 #include "main.h"
 #include "watek_komunikacyjny.h"
 
+// sortowanie listy studentow po zegarze lamporta i id
+void sort_students_list()
+{
+    for (int i = 0; i < count - 1; i++)
+    {
+        for (int j = 0; j < count - i - 1; j++)
+        {
+            if (students_list[j].ts > students_list[j + 1].ts ||
+                (students_list[j].ts == students_list[j + 1].ts && students_list[j].src > students_list[j + 1].src))
+            {
+                packet_t temp = students_list[j];
+                students_list[j] = students_list[j + 1];
+                students_list[j + 1] = temp;
+            }
+        }
+    }
+}
+
 /* wątek komunikacyjny; zajmuje się odbiorem i reakcją na komunikaty */
 void *startKomWatek(void *ptr)
 {
@@ -18,21 +36,30 @@ void *startKomWatek(void *ptr)
 
         switch (status.MPI_TAG)
         {
-        case REQUEST:
-            debug("Ktoś coś prosi. A niech ma!");
-            sendPacket(0, status.MPI_SOURCE, ACK);
-            break;
-        case ACK:
-            debug("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
-            printf("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
-            ackCount++; /* czy potrzeba tutaj muteksa? Będzie wyścig, czy nie będzie? Zastanówcie się. */
-            break;
+        // case REQUEST:
+        //     debug("Ktoś coś prosi. A niech ma!");
+        //     sendPacket(0, status.MPI_SOURCE, ACK);
+        //     break;
+        // case ACK:
+        //     debug("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
+        //     printf("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
+        //     ackCount++; /* czy potrzeba tutaj muteksa? Będzie wyścig, czy nie będzie? Zastanówcie się. */
+        //     break;
         case MSG_KILL:
             // MSG_KILL-specific logic here
             break;
         case MSG_ROLE:
             debug("Otrzymałem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
-            printf("Otrzymałem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
+            printf("Otrzymałem rolę %s od %d z zegarem %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src, pakiet.ts);
+
+            // Dodanie do listy
+            if (count < size)
+            {
+                students_list[count] = pakiet;
+                count++;
+                sort_students_list(); // Sortowanie listy
+            }
+
             sendPacket(0, pakiet.src, ACK_ROLE); // Wysyłanie potwierdzenia ACK_ROLE
             break;
         case ACK_ROLE:

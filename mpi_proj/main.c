@@ -14,6 +14,8 @@
 int rank, size;
 int ackCount = 0;
 int lamport_clock = 0;
+packet_t students_list[100]; // Lista studentów
+int count = 0;               // Licznik dodanych studentów
 
 /*
  * Każdy proces ma dwa wątki - główny i komunikacyjny

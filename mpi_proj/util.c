@@ -63,10 +63,10 @@ void sendPacket(packet_t *pkt, int destination, int tag)
         pkt = malloc(sizeof(packet_t));
         freepkt = 1;
     }
-    pkt->src = rank;
+    pkt->src = rank; // id procesu
     pthread_mutex_lock(&lamport_clock_mutex);
     lamport_clock++;
-    pkt->ts = lamport_clock;
+    pkt->ts = lamport_clock; // zegar lamporta procesu
     pthread_mutex_unlock(&lamport_clock_mutex);
     MPI_Send(pkt, 1, MPI_PAKIET_T, destination, tag, MPI_COMM_WORLD);
     debug("Wysyłam %s do %d\n", tag2string(tag), destination);

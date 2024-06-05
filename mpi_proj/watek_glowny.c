@@ -65,6 +65,7 @@ void mainLoop()
 			perc = random() % 100;
 			packet_t *pkt = malloc(sizeof(packet_t));
 			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
+
 			for (int i = 0; i < size; i++)
 			{
 				if (i != rank)
