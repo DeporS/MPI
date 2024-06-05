@@ -81,8 +81,8 @@ void mainLoop()
 		case KILLER:
 			if (ackCount == size - 1)
 			{
-				changeState(WANNAKILL)
-					printf("Wchodze w stan WANNAKILL!\n");
+				changeState(WANNAKILL);
+				printf("Wchodze w stan WANNAKILL!\n");
 			}
 			break;
 		case WANNAKILL:
