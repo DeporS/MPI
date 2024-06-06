@@ -17,6 +17,8 @@ pthread_mutex_t stateMut = PTHREAD_MUTEX_INITIALIZER;
 
 pthread_mutex_t lamport_clock_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+pthread_mutex_t beer_mutex = PTHREAD_MUTEX_INITIALIZER;
+
 struct tagNames_t
 {
     const char *name;
@@ -66,7 +68,7 @@ void sendPacket(packet_t *pkt, int destination, int tag)
     pkt->src = rank; // id procesu
     pthread_mutex_lock(&lamport_clock_mutex);
     lamport_clock++;
-    pkt->ts = lamport_clock; // zegar lamporta procesu
+    pkt->ts = lamport_clock; // zegar lamporta zadania
     pthread_mutex_unlock(&lamport_clock_mutex);
     MPI_Send(pkt, 1, MPI_PAKIET_T, destination, tag, MPI_COMM_WORLD);
     debug("Wysyłam %s do %d\n", tag2string(tag), destination);
