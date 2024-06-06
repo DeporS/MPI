@@ -119,7 +119,7 @@ void *startKomWatek(void *ptr)
         case THE_END:
             debug("Otrzymalem THE_END od %d\n", pakiet.src);
 
-            for (int i = 0; i < count - 1; i++)
+            for (int i = 0; i < count; i++)
             {
                 // wziecie pierwszej ofiary z listy
                 if (students_list[i].data == VICTIM)
@@ -135,7 +135,7 @@ void *startKomWatek(void *ptr)
                 }
             }
 
-            for (int i = 0; i < count - 1; i++)
+            for (int i = 0; i < count; i++)
             {
                 // wziecie pierwszego zabojcy z listy
                 if (students_list[i].data == KILLER)
