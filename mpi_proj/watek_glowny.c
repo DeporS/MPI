@@ -84,7 +84,7 @@ void mainLoop()
 		case VICTIM:
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
-				printf("Koniec!\n");
+				printf("Jestem ofiara i mowie Koniec!\n");
 			}
 			break;
 		case KILLER:
@@ -179,7 +179,7 @@ void mainLoop()
 		case ITS_OVER:
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
-				printf("Koniec!\n");
+				printf("Jestem zabojca i mowie Koniec!\n");
 			}
 			break;
 		default:
