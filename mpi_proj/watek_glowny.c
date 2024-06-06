@@ -1,9 +1,10 @@
 #include "main.h"
 #include "watek_glowny.h"
+#include "time.h"
 
 void mainLoop()
 {
-	srandom(NULL);
+	srandom(time(NULL));
 	int tag;
 	int perc;
 
