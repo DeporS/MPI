@@ -89,7 +89,19 @@ void *startKomWatek(void *ptr)
         case ACK_KILL:
             debug("Otrzymalem ACK_KILL od %d\n", pakiet.src);
             ack_kill_count++;
-            if ((ack_kill_count == size - 1 - victim_count) && min(victim_count, killer_count) != 0)
+
+            // odczytanie pierwszego zadania od killera w liscie
+            int first_killer = 100;
+            for (int i = 0; i < victim_count + killer_count - 1; i++)
+            {
+                if (students_list[i].data == KILLER)
+                {
+                    first_killer = students_list[i].src;
+                    break;
+                }
+            }
+
+            if ((ack_kill_count >= size - 1 - victim_count) && (min(victim_count, killer_count) != 0) && (first_killer == rank))
             {
                 changeState(KILLING);
                 victim_count--;
