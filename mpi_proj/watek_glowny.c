@@ -13,19 +13,6 @@ void mainLoop()
 		switch (stan)
 		{
 		case REST:
-			// zerowanie wartosci dla nowego cyklu
-			ackCount = 0;
-			memset(students_list, 0, sizeof(students_list)); // zerowanie wartosci listy
-			count = 0;										 // Licznik dodanych studentów
-			ack_kill_count = 0;								 // Liczba otrzymanych ACK_KILL
-			victim_count = 0;
-			killer_count = 0;
-			is_killing = FALSE;
-			THE_END_counter = 0;
-			beer_counter = 0;
-			victim_count_local = 0;
-			killer_count_local = 0;
-
 			perc = random() % 100;
 			packet_t *pkt = malloc(sizeof(packet_t));
 			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
@@ -48,6 +35,19 @@ void mainLoop()
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Jestem ofiara i mowie Koniec!\n");
+
+				// zerowanie wartosci dla nowego cyklu
+				ackCount = 0;
+				memset(students_list, 0, sizeof(students_list)); // zerowanie wartosci listy
+				count = 0;										 // Licznik dodanych studentów
+				ack_kill_count = 0;								 // Liczba otrzymanych ACK_KILL
+				victim_count = 0;
+				killer_count = 0;
+				is_killing = FALSE;
+				THE_END_counter = 0;
+				beer_counter = 0;
+				victim_count_local = 0;
+				killer_count_local = 0;
 
 				changeState(REST);
 			}
@@ -145,6 +145,20 @@ void mainLoop()
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Jestem zabojca i mowie Koniec!\n");
+
+				// zerowanie wartosci dla nowego cyklu
+				ackCount = 0;
+				memset(students_list, 0, sizeof(students_list)); // zerowanie wartosci listy
+				count = 0;										 // Licznik dodanych studentów
+				ack_kill_count = 0;								 // Liczba otrzymanych ACK_KILL
+				victim_count = 0;
+				killer_count = 0;
+				is_killing = FALSE;
+				THE_END_counter = 0;
+				beer_counter = 0;
+				victim_count_local = 0;
+				killer_count_local = 0;
+
 				changeState(REST);
 			}
 			break;
