@@ -38,7 +38,7 @@ void mainLoop()
 
 			perc = random() % 100;
 			packet_t *pkt = malloc(sizeof(packet_t));
-			pkt->data = (perc < 100) ? KILLER : VICTIM; // Losowanie roli
+			pkt->data = (perc < 0) ? KILLER : VICTIM; // Losowanie roli
 			if (pkt->data == KILLER)
 			{
 				printf("[%d] Jestem zabojca ŁAAAA\n", rank);
