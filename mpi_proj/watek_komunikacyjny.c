@@ -123,7 +123,7 @@ void *startKomWatek(void *ptr)
             break;
         case THE_END:
             debug("Otrzymalem THE_END od %d\n", pakiet.src);
-            printf("[%d] Otrzymalem THE_END od %d\n", rank, pakiet.src);
+            // printf("[%d] Otrzymalem THE_END od %d\n", rank, pakiet.src);
 
             for (int i = 0; i < count; i++)
             {
