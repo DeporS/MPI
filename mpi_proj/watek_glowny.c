@@ -125,22 +125,30 @@ void mainLoop()
 						break;
 					}
 				}
-				debug("Paruję się z ofiarą %d\n", victim.src);
-				printf("Paruję się z ofiarą %d\n", victim.src);
+				if (victim_found)
+				{ // Sprawdzenie, czy ofiara została znaleziona
+					debug("Paruję się z ofiarą %d\n", victim.src);
+					printf("Paruję się z ofiarą %d\n", victim.src);
 
-				// losowanie wyniku starcia
-				double result = (double)rand() / RAND_MAX;
-				if (result > 0.5)
-				{
-					debug("Wygrałem starcie z %d\n", victim.src);
-					printf("Wygrałem starcie z %d\n", victim.src);
-					// Możesz dodać dodatkową logikę dla wygranej
+					// Losowanie wyniku starcia
+					double result = (double)rand() / RAND_MAX;
+					if (result > 0.5)
+					{
+						debug("Wygrałem starcie z %d\n", victim.src);
+						printf("Wygrałem starcie z %d\n", victim.src);
+						// Możesz dodać dodatkową logikę dla wygranej
+					}
+					else
+					{
+						debug("Przegrałem starcie z %d\n", victim.src);
+						printf("Przegrałem starcie z %d\n", victim.src);
+						// Możesz dodać dodatkową logikę dla przegranej
+					}
 				}
 				else
 				{
-					debug("Przegrałem starcie z %d\n", victim.src);
-					printf("Przegrałem starcie z %d\n", victim.src);
-					// Możesz dodać dodatkową logikę dla przegranej
+					debug("Nie znaleziono ofiary\n");
+					printf("Nie znaleziono ofiary\n");
 				}
 			}
 
