@@ -96,8 +96,52 @@ void mainLoop()
 
 			break;
 		case KILLING:
-			// KILLING-specific logic here
+			// Wchodzenie do sekcji krytycznej
+			pthread_mutex_lock(&student_list_mutex); // Blokowanie dostępu do listy studentow
+
+			if (count > 0)
+			{
+				packet_t victim;
+				for (int i = 0; i < count - 1; i++)
+				{
+					// wziecie pierwszej ofiary z listy
+					if (students_list[i].data == VICTIM)
+					{
+						victim = students_list[i];
+						// usuniecie tej ofiary z listy
+						for (int j = i; j < count; j++)
+						{
+							students_list[j] = students_list[j + 1];
+						}
+						count--;
+						break;
+					}
+				}
+				debug("Paruję się z ofiarą %d\n", victim.src);
+				printf("Paruję się z ofiarą %d\n", victim.src);
+
+				// losowanie wyniku starcia
+				double result = (double)rand() / RAND_MAX;
+				if (result > 0.5)
+				{
+					debug("Wygrałem starcie z %d\n", victim.src);
+					printf("Wygrałem starcie z %d\n", victim.src);
+					// Możesz dodać dodatkową logikę dla wygranej
+				}
+				else
+				{
+					debug("Przegrałem starcie z %d\n", victim.src);
+					printf("Przegrałem starcie z %d\n", victim.src);
+					// Możesz dodać dodatkową logikę dla przegranej
+				}
+			}
+
+			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
+
+			// Po zakończeniu sekcji krytycznej zmiana stanu na inny, np. REST
+			changeState(REST);
 			break;
+
 		case ITS_OVER:
 			// ITS_OVER-specific logic here
 			break;
