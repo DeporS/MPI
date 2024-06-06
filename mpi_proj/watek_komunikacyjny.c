@@ -71,8 +71,8 @@ void *startKomWatek(void *ptr)
 
             // Dodanie procesu do listy studentów
             insert_student(pakiet);
-
-            sendPacket(0, pakiet.src, ACK_ROLE); // Wysylanie potwierdzenia ACK_ROLE
+            if (rank != pakiet.src)
+                sendPacket(0, pakiet.src, ACK_ROLE); // Wysylanie potwierdzenia ACK_ROLE
             break;
         case ACK_ROLE:
             debug("Otrzymalem ACK_ROLE od %d\n", pakiet.src);
