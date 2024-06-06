@@ -163,7 +163,8 @@ void *startKomWatek(void *ptr)
             {
                 for (int i = 0; i < size; i++)
                 {
-                    sendPacket(0, i, BEER_TIME); // beer time
+                    if (rank != i)
+                        sendPacket(0, i, BEER_TIME); // beer time
                 }
             }
 
