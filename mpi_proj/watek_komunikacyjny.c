@@ -128,6 +128,21 @@ void *startKomWatek(void *ptr)
                     break;
                 }
             }
+
+            for (int i = 0; i < count - 1; i++)
+            {
+                // wziecie pierwszego zabojcy z listy
+                if (students_list[i].data == KILLER)
+                {
+                    // usuniecie tego zabojcy z listy
+                    for (int j = i; j < count; j++)
+                    {
+                        students_list[j] = students_list[j + 1];
+                    }
+                    count--;
+                    break;
+                }
+            }
             break;
         case BEER_TIME:
             // BEER_TIME-specific logic here
