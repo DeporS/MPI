@@ -92,14 +92,15 @@ void *startKomWatek(void *ptr)
             if ((ack_kill_count == size - 1 - victim_count) && min(victim_count, killer_count) != 0)
             {
                 changeState(KILLING);
+                victim_count--;
+                killer_count--;
                 debug("Przechodzę w stan KILLING\n");
                 printf("Przechodze w stan KILLING\n");
             }
             break;
         case THE_END:
             debug("Otrzymalem THE_END od %d\n", pakiet.src);
-            victim_count--;
-            killer_count--;
+
             for (int i = 0; i < count - 1; i++)
             {
                 // wziecie pierwszej ofiary z listy

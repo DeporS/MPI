@@ -67,11 +67,11 @@ void mainLoop()
 			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
 			if (pkt->data == KILLER)
 			{
-				printf("Jestem zabojca ŁAAAA\n");
+				printf("Jestem zabojca(%d) ŁAAAA\n", rank);
 			}
 			else
 			{
-				printf("Jestem ofiarą.. chu.. sie wylosowalo\n");
+				printf("Jestem ofiarą(%d).. chu.. sie wylosowalo\n", rank);
 			}
 
 			for (int i = 0; i < size; i++)
