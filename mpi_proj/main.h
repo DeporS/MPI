@@ -49,6 +49,7 @@ extern int ack_kill_count;
 extern int victim_count;
 extern int killer_count;
 extern packet_t students_list[100]; // Lista studentów
+extern int is_killing;
 
 extern pthread_t threadKom;
 

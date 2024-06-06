@@ -101,8 +101,9 @@ void *startKomWatek(void *ptr)
                 }
             }
 
-            if ((ack_kill_count >= size - 1 - victim_count) && (min(victim_count, killer_count) != 0) && (first_killer == rank))
+            if ((ack_kill_count >= size - 1 - victim_count) && (min(victim_count, killer_count) != 0) && (first_killer == rank) && (!is_killing))
             {
+                is_killing = TRUE;
                 changeState(KILLING);
                 victim_count--;
                 killer_count--;
