@@ -171,8 +171,8 @@ void *startKomWatek(void *ptr)
             break;
         case BEER_TIME:
             beer_counter++;
-            pthread_mutex_trylock(&beer_mutex);
-            pthread_mutex_unlock(&beer_mutex);
+            // pthread_mutex_trylock(&beer_mutex);
+            // pthread_mutex_unlock(&beer_mutex);
 
             break;
         default:

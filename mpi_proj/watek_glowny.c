@@ -64,12 +64,12 @@ void mainLoop()
 
 				changeState(REST);
 			}
-			else
-			{
-				pthread_mutex_lock(&beer_mutex);
-				pthread_mutex_lock(&beer_mutex);
-				pthread_mutex_unlock(&beer_mutex);
-			}
+			// else
+			//  {
+			//  	pthread_mutex_lock(&beer_mutex);
+			//  	pthread_mutex_lock(&beer_mutex);
+			//  	pthread_mutex_unlock(&beer_mutex);
+			//  }
 			break;
 		case KILLER:
 			if (ackCount == size - 1)
@@ -98,12 +98,12 @@ void mainLoop()
 
 				break;
 			}
-			else
-			{
-				pthread_mutex_lock(&beer_mutex);
-				pthread_mutex_lock(&beer_mutex);
-				pthread_mutex_unlock(&beer_mutex);
-			}
+			// else
+			// {
+			// 	pthread_mutex_lock(&beer_mutex);
+			// 	pthread_mutex_lock(&beer_mutex);
+			// 	pthread_mutex_unlock(&beer_mutex);
+			// }
 
 			break;
 		case KILLING:
@@ -190,12 +190,12 @@ void mainLoop()
 
 				changeState(REST);
 			}
-			else
-			{
-				pthread_mutex_lock(&beer_mutex);
-				pthread_mutex_lock(&beer_mutex);
-				pthread_mutex_unlock(&beer_mutex);
-			}
+			// else
+			// {
+			// 	pthread_mutex_lock(&beer_mutex);
+			// 	pthread_mutex_lock(&beer_mutex);
+			// 	pthread_mutex_unlock(&beer_mutex);
+			// }
 			break;
 		default:
 			break;
