@@ -70,7 +70,7 @@ void mainLoop()
 			{
 				int victim_found = 0;
 				packet_t victim;
-				for (int i = 0; i < count - 1; i++)
+				for (int i = 0; i < count; i++)
 				{
 					// wziecie pierwszej ofiary z listy
 					if (students_list[i].data == VICTIM)
