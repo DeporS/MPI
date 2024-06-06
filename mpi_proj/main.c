@@ -16,6 +16,8 @@ int ackCount = 0;
 int lamport_clock = 0;
 packet_t students_list[100]; // Lista studentów
 int count = 0;               // Licznik dodanych studentów
+int ack_kill_count = 0;      // Liczba otrzymanych ACK_KILL
+int victim_count = 0;
 
 /*
  * Każdy proces ma dwa wątki - główny i komunikacyjny

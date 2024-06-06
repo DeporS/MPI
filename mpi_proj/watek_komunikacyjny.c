@@ -58,27 +58,37 @@ void *startKomWatek(void *ptr)
             // MSG_KILL-specific logic here
             break;
         case MSG_ROLE:
-            debug("Otrzymałem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
-            printf("Otrzymałem rolę %s od %d z zegarem %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src, pakiet.ts);
+            debug("Otrzymalem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
+            // printf("Otrzymalem rolę %s od %d z zegarem %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src, pakiet.ts);
+            if (pakiet.data == VICTIM)
+                victim_count++;
 
             // Dodanie procesu do listy studentów
             insert_student(pakiet);
 
-            sendPacket(0, pakiet.src, ACK_ROLE); // Wysyłanie potwierdzenia ACK_ROLE
+            sendPacket(0, pakiet.src, ACK_ROLE); // Wysylanie potwierdzenia ACK_ROLE
             break;
         case ACK_ROLE:
-            debug("Otrzymałem ACK_ROLE od %d\n", pakiet.src);
-            printf("Otrzymałem ACK_ROLE od %d\n", pakiet.src);
+            debug("Otrzymalem ACK_ROLE od %d\n", pakiet.src);
+            // printf("Otrzymalem ACK_ROLE od %d\n", pakiet.src);
             ackCount++;
             break;
         case MSG_VIC:
             // MSG_VIC-specific logic here
             break;
         case REQ_KILL:
-            // REQ_KILL-specific logic here
+            debug("Otrzymalem REQ_KILL od %d\n", pakiet.src);
+            sendPacket(0, pakiet.src, ACK_KILL);
             break;
         case ACK_KILL:
-            // ACK_KILL-specific logic here
+            debug("Otrzymalem ACK_KILL od %d\n", pakiet.src);
+            ack_kill_count++;
+            if (ack_kill_count == size - 1 - victim_count)
+            {
+                changeState(KILLING);
+                debug("Przechodzę w stan KILLING\n");
+                printf("Przechodze w stan KILLING\n");
+            }
             break;
         case THE_END:
             // THE_END-specific logic here

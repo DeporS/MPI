@@ -44,6 +44,8 @@ extern int size;
 extern int ackCount;
 extern int lamport_clock;
 extern int count;
+extern int ack_kill_count;
+extern int victim_count;
 extern packet_t students_list[100]; // Lista studentów
 
 extern pthread_t threadKom;
