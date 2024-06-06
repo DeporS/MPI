@@ -118,7 +118,7 @@ void *startKomWatek(void *ptr)
                 victim_count--;
                 killer_count--;
                 debug("Przechodzę w stan KILLING\n");
-                printf("\n[%d] Przechodze w stan KILLING (wchodze do sekcji krytycznej)\n", rank);
+                printf("\n[%d][%d] Przechodze w stan KILLING (wchodze do sekcji krytycznej)\n", rank, pakiet.ts);
             }
             break;
         case THE_END:
