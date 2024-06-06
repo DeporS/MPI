@@ -2,6 +2,22 @@
 #include "watek_glowny.h"
 #include <time.h>
 
+void resetValues()
+{
+	// zerowanie wartosci dla nowego cyklu
+	ackCount = 0;
+	memset(students_list, 0, sizeof(students_list)); // zerowanie wartosci listy
+	count = 0;										 // Licznik dodanych studentów
+	ack_kill_count = 0;								 // Liczba otrzymanych ACK_KILL
+	victim_count = 0;
+	killer_count = 0;
+	is_killing = FALSE;
+	THE_END_counter = 0;
+	beer_counter = 0;
+	victim_count_local = 0;
+	killer_count_local = 0;
+}
+
 void mainLoop()
 {
 	srandom(time(NULL) + rank);
@@ -13,6 +29,8 @@ void mainLoop()
 		switch (stan)
 		{
 		case REST:
+			resetValues();
+
 			perc = random() % 100;
 			packet_t *pkt = malloc(sizeof(packet_t));
 			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
@@ -36,19 +54,6 @@ void mainLoop()
 			{
 				printf("Jestem ofiara i mowie Koniec!\n");
 
-				// zerowanie wartosci dla nowego cyklu
-				ackCount = 0;
-				memset(students_list, 0, sizeof(students_list)); // zerowanie wartosci listy
-				count = 0;										 // Licznik dodanych studentów
-				ack_kill_count = 0;								 // Liczba otrzymanych ACK_KILL
-				victim_count = 0;
-				killer_count = 0;
-				is_killing = FALSE;
-				THE_END_counter = 0;
-				beer_counter = 0;
-				victim_count_local = 0;
-				killer_count_local = 0;
-
 				changeState(REST);
 			}
 			break;
@@ -60,6 +65,12 @@ void mainLoop()
 			}
 			break;
 		case WANNAKILL:
+			if (beer_counter == size - min(victim_count_local, killer_count_local))
+			{
+				printf("Jestem zabojca i mowie Koniec!\n");
+
+				changeState(REST);
+			}
 			for (int i = 0; i < size; i++)
 			{
 				if (i != rank)
@@ -70,26 +81,6 @@ void mainLoop()
 
 			break;
 		case KILLING:
-
-			if (beer_counter == size - min(victim_count_local, killer_count_local))
-			{
-				printf("Jestem zabojca i mowie Koniec!\n");
-
-				// zerowanie wartosci dla nowego cyklu
-				ackCount = 0;
-				memset(students_list, 0, sizeof(students_list)); // zerowanie wartosci listy
-				count = 0;										 // Licznik dodanych studentów
-				ack_kill_count = 0;								 // Liczba otrzymanych ACK_KILL
-				victim_count = 0;
-				killer_count = 0;
-				is_killing = FALSE;
-				THE_END_counter = 0;
-				beer_counter = 0;
-				victim_count_local = 0;
-				killer_count_local = 0;
-
-				changeState(REST);
-			}
 
 			// Wchodzenie do sekcji krytycznej
 			pthread_mutex_lock(&student_list_mutex); // Blokowanie dostępu do listy studentow
@@ -166,19 +157,6 @@ void mainLoop()
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Jestem zabojca i mowie Koniec!\n");
-
-				// zerowanie wartosci dla nowego cyklu
-				ackCount = 0;
-				memset(students_list, 0, sizeof(students_list)); // zerowanie wartosci listy
-				count = 0;										 // Licznik dodanych studentów
-				ack_kill_count = 0;								 // Liczba otrzymanych ACK_KILL
-				victim_count = 0;
-				killer_count = 0;
-				is_killing = FALSE;
-				THE_END_counter = 0;
-				beer_counter = 0;
-				victim_count_local = 0;
-				killer_count_local = 0;
 
 				changeState(REST);
 			}
