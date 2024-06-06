@@ -3,9 +3,6 @@
 
 pthread_mutex_t student_list_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-int victim_count_local = 0;
-int killer_count_local = 0;
-
 void insert_student(packet_t pakiet)
 {
     // pthread_mutex_lock(&student_list_mutex);
