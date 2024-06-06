@@ -55,7 +55,7 @@ void mainLoop()
 			changeState((pkt->data == KILLER) ? KILLER : VICTIM); // Zmiana stanu na KILLER lub VICTIM
 			break;
 		case VICTIM:
-			if (beer_counter == size - min(victim_count_local, killer_count_local))
+			if (beer_counter == size - 1)
 			{
 				printf("[%d] Jestem ofiara i mowie Koniec! piwa: %d\n", rank, beer_counter);
 
@@ -72,7 +72,7 @@ void mainLoop()
 			}
 			break;
 		case WANNAKILL:
-			if (beer_counter == size - min(victim_count_local, killer_count_local))
+			if (beer_counter == size - 1)
 			{
 				printf("[%d] Jestem zabojca i mowie Koniec! piwa: %d\n", rank, beer_counter);
 
@@ -152,20 +152,20 @@ void mainLoop()
 			}
 			for (int i = 0; i < size; i++)
 			{
-				if (i != rank)
-				{
-					sendPacket(0, i, THE_END); // wysylanie wiadomosci o koncu walki
-				}
+				// if (i != rank)
+				// {
+				sendPacket(0, i, THE_END); // wysylanie wiadomosci o koncu walki
+										   //}
 			}
 
 			changeState(ITS_OVER);
 
-			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
+			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów if (beer_counter == size - min(victim_count_local, killer_count_local))
 
 			break;
 
 		case ITS_OVER:
-			if (beer_counter == size - min(victim_count_local, killer_count_local))
+			if (beer_counter == size - 1)
 			{
 				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
 
