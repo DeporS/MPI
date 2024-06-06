@@ -124,6 +124,7 @@ void *startKomWatek(void *ptr)
                     {
                         students_list[j] = students_list[j + 1];
                     }
+                    victim_count--;
                     count--;
                     break;
                 }
@@ -139,6 +140,7 @@ void *startKomWatek(void *ptr)
                     {
                         students_list[j] = students_list[j + 1];
                     }
+                    killer_count--;
                     count--;
                     break;
                 }
