@@ -45,18 +45,6 @@ void *startKomWatek(void *ptr)
 
         switch (status.MPI_TAG)
         {
-        // case REQUEST:
-        //     debug("Ktoś coś prosi. A niech ma!");
-        //     sendPacket(0, status.MPI_SOURCE, ACK);
-        //     break;
-        // case ACK:
-        //     debug("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
-        //     printf("Dostałem ACK od %d, mam już %d", status.MPI_SOURCE, ackCount);
-        //     ackCount++; /* czy potrzeba tutaj muteksa? Będzie wyścig, czy nie będzie? Zastanówcie się. */
-        //     break;
-        case MSG_KILL:
-            // MSG_KILL-specific logic here
-            break;
         case MSG_ROLE:
             debug("Otrzymalem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
             // printf("Otrzymalem rolę %s od %d z zegarem %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src, pakiet.ts);
@@ -88,9 +76,6 @@ void *startKomWatek(void *ptr)
             debug("Otrzymalem ACK_ROLE od %d\n", pakiet.src);
             // printf("Otrzymalem ACK_ROLE od %d\n", pakiet.src);
             ackCount++;
-            break;
-        case MSG_VIC:
-            // MSG_VIC-specific logic here
             break;
         case REQ_KILL:
             debug("Otrzymalem REQ_KILL od %d\n", pakiet.src);
