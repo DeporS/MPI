@@ -76,10 +76,7 @@ void mainLoop()
 
 			for (int i = 0; i < size; i++)
 			{
-				if (i != rank)
-				{
-					sendPacket(pkt, i, MSG_ROLE); // Wysyłanie roli do wszystkich
-				}
+				sendPacket(pkt, i, MSG_ROLE); // Wysyłanie roli do wszystkich i do siebie
 			}
 			changeState((pkt->data == KILLER) ? KILLER : VICTIM); // Zmiana stanu na KILLER lub VICTIM
 			break;
@@ -115,7 +112,7 @@ void mainLoop()
 			for (int i = 0; i < count; i++)
 			{
 				debug("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
-				// printf("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
+				printf("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
 			}
 
 			if (count > 0)
