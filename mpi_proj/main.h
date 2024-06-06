@@ -51,6 +51,8 @@ extern packet_t students_list[100]; // Lista studentów
 
 extern pthread_t threadKom;
 
+#define min(a, b) ((a) < (b) ? (a) : (b))
+
 /* macro debug - działa jak printf, kiedy zdefiniowano
    DEBUG, kiedy DEBUG niezdefiniowane działa jak instrukcja pusta
 
