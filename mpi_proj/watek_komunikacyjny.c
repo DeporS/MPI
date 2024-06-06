@@ -5,7 +5,7 @@ pthread_mutex_t student_list_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void insert_student(packet_t pakiet)
 {
-    pthread_mutex_lock(&student_list_mutex);
+    // pthread_mutex_lock(&student_list_mutex);
 
     students_list[count] = pakiet;
     count++;
@@ -25,7 +25,7 @@ void insert_student(packet_t pakiet)
         }
     }
 
-    pthread_mutex_unlock(&student_list_mutex);
+    // pthread_mutex_unlock(&student_list_mutex);
 }
 
 /* wątek komunikacyjny; zajmuje się odbiorem i reakcją na komunikaty */
