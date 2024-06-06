@@ -82,7 +82,7 @@ void mainLoop()
 			changeState((pkt->data == KILLER) ? KILLER : VICTIM); // Zmiana stanu na KILLER lub VICTIM
 			break;
 		case VICTIM:
-			if (beer_counter == size - 1)
+			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Koniec!\n");
 			}
@@ -177,7 +177,7 @@ void mainLoop()
 			break;
 
 		case ITS_OVER:
-			if (beer_counter == size - 1)
+			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Koniec!\n");
 			}
