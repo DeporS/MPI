@@ -152,10 +152,8 @@ void *startKomWatek(void *ptr)
             }
 
             THE_END_counter++;
-            printf("THE END COUNTER %d\n", THE_END_counter);
             if (THE_END_counter == min(killer_count_local, victim_count_local))
             {
-                printf("PIWO!\n");
                 for (int i = 0; i < size; i++)
                 {
                     sendPacket(0, i, BEER_TIME); // beer time
