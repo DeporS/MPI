@@ -57,7 +57,7 @@ void mainLoop()
 		case VICTIM:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem ofiara i mowie Koniec!\n\n", rank);
+				printf("[%d] Jestem ofiara i mowie Koniec!\n", rank);
 
 				resetValues();
 
@@ -74,7 +74,7 @@ void mainLoop()
 		case WANNAKILL:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem zabojca i mowie Koniec!\n\n", rank);
+				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
 
 				resetValues();
 
@@ -160,7 +160,7 @@ void mainLoop()
 
 			changeState(ITS_OVER);
 
-			printf("[%d] Wychodze z sekcji krytycznej\n", rank);
+			printf("[%d] Wychodze z sekcji krytycznej\n\n", rank);
 
 			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
 
@@ -169,7 +169,7 @@ void mainLoop()
 		case ITS_OVER:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem zabojca i mowie Koniec!\n\n", rank);
+				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
 
 				resetValues();
 
