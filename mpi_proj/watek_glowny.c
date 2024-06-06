@@ -63,6 +63,12 @@ void mainLoop()
 
 				changeState(REST);
 			}
+			else
+			{
+				lock(beer_mutex);
+				lock(beer_mutex);
+				unlock(beer_mutex);
+			}
 			break;
 		case KILLER:
 			if (ackCount == size - 1)
@@ -72,6 +78,15 @@ void mainLoop()
 			}
 			break;
 		case WANNAKILL:
+
+			for (int i = 0; i < size; i++)
+			{
+				if (i != rank)
+				{
+					sendPacket(0, i, REQ_KILL); // Wysyłanie checi bitwy do wszystkich
+				}
+			}
+
 			if (beer_counter == size - 1)
 			{
 				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
@@ -82,19 +97,18 @@ void mainLoop()
 
 				break;
 			}
-			for (int i = 0; i < size; i++)
+			else
 			{
-				if (i != rank)
-				{
-					sendPacket(0, i, REQ_KILL); // Wysyłanie checi bitwy do wszystkich
-				}
+				lock(beer_mutex);
+				lock(beer_mutex);
+				unlock(beer_mutex);
 			}
 
 			break;
 		case KILLING:
 
 			// Wchodzenie do sekcji krytycznej
-			pthread_mutex_lock(&student_list_mutex); // Blokowanie dostępu do listy studentow
+			// pthread_mutex_lock(&student_list_mutex); // Blokowanie dostępu do listy studentow
 
 			debug("Zawartość students_list przed KILLING:\n");
 			// printf("Zawartość students_list przed KILLING:\n");
@@ -162,7 +176,7 @@ void mainLoop()
 
 			printf("[%d] Wychodze z sekcji krytycznej\n\n", rank);
 
-			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
+			// pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
 
 			break;
 
@@ -174,6 +188,12 @@ void mainLoop()
 				resetValues();
 
 				changeState(REST);
+			}
+			else
+			{
+				lock(beer_mutex);
+				lock(beer_mutex);
+				unlock(beer_mutex);
 			}
 			break;
 		default:
