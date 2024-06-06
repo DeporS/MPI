@@ -40,7 +40,7 @@ void finalizuj()
 
 void check_thread_support(int provided)
 {
-    printf("THREAD SUPPORT: chcemy %d. Co otrzymamy?\n", provided);
+    // printf("THREAD SUPPORT: chcemy %d. Co otrzymamy?\n", provided);
     switch (provided)
     {
     case MPI_THREAD_SINGLE:
@@ -58,7 +58,7 @@ void check_thread_support(int provided)
         printf("tylko jeden watek naraz może wykonać wołania do biblioteki MPI\n");
         break;
     case MPI_THREAD_MULTIPLE:
-        printf("Pełne wsparcie dla wątków\n"); /* tego chcemy. Wszystkie inne powodują problemy */
+        // printf("Pełne wsparcie dla wątków\n"); /* tego chcemy. Wszystkie inne powodują problemy */
         break;
     default:
         printf("Nikt nic nie wie\n");
