@@ -42,11 +42,15 @@ void mainLoop()
 			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
 			if (pkt->data == KILLER)
 			{
-				printf("[%d] Jestem zabojca!!\n", rank);
+				pthread_mutex_lock(&lamport_clock_mutex);
+				printf("[%d][%d] Jestem zabojca!!\n", rank, lamport_clock);
+				pthread_mutex_unlock(&lamport_clock_mutex);
 			}
 			else
 			{
-				printf("[%d] Jestem ofiarą.. Trudne sie wylosowalo\n", rank);
+				pthread_mutex_lock(&lamport_clock_mutex);
+				printf("[%d][%d] Jestem ofiarą.. Trudne sie wylosowalo\n", rank, lamport_clock);
+				pthread_mutex_unlock(&lamport_clock_mutex);
 			}
 
 			for (int i = 0; i < size; i++)
@@ -58,7 +62,9 @@ void mainLoop()
 		case VICTIM:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem ofiara i mowie Koniec!\n", rank);
+				pthread_mutex_lock(&lamport_clock_mutex);
+				printf("[%d][%d] Jestem ofiara i mowie Koniec!\n", rank, lamport_clock);
+				pthread_mutex_unlock(&lamport_clock_mutex);
 
 				resetValues();
 
@@ -75,7 +81,9 @@ void mainLoop()
 			if (ackCount == size - 1)
 			{
 				changeState(WANNAKILL);
-				printf("[%d] Wchodze w stan WANNAKILL!\n", rank);
+				pthread_mutex_lock(&lamport_clock_mutex);
+				printf("[%d][%d] Wchodze w stan WANNAKILL!\n", rank, lamport_clock);
+				pthread_mutex_unlock(&lamport_clock_mutex);
 			}
 			break;
 		case WANNAKILL:
@@ -90,7 +98,9 @@ void mainLoop()
 
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
+				pthread_mutex_lock(&lamport_clock_mutex);
+				printf("[%d][%d] Jestem zabojca i mowie Koniec!\n", rank, lamport_clock);
+				pthread_mutex_unlock(&lamport_clock_mutex);
 
 				resetValues();
 
@@ -139,31 +149,33 @@ void mainLoop()
 						break;
 					}
 				}
+				pthread_mutex_lock(&lamport_clock_mutex);
 				if (victim_found)
 				{ // Sprawdzenie, czy ofiara została znaleziona
 					debug("Paruję się z ofiarą %d\n", victim.src);
-					printf("[%d] Paruję się z ofiarą %d\n", rank, victim.src);
+					printf("[%d][%d] Paruję się z ofiarą %d\n", rank, lamport_clock, victim.src);
 
 					// Losowanie wyniku starcia
 					double result = (double)rand() / RAND_MAX;
 					if (result > 0.5)
 					{
 						debug("Wygrałem starcie z %d\n", victim.src);
-						printf("[%d] Wygrałem starcie z %d\n", rank, victim.src);
+						printf("[%d][%d] Wygrałem starcie z %d\n", rank, lamport_clock, victim.src);
 						// Możesz dodać dodatkową logikę dla wygranej
 					}
 					else
 					{
 						debug("Przegrałem starcie z %d\n", victim.src);
-						printf("[%d] Przegrałem starcie z %d\n", rank, victim.src);
+						printf("[%d][%d] Przegrałem starcie z %d\n", rank, lamport_clock, victim.src);
 						// Możesz dodać dodatkową logikę dla przegranej
 					}
 				}
 				else
 				{
 					debug("Nie znaleziono ofiary\n");
-					printf("[%d] Nie znaleziono mi ofiary\n", rank);
+					printf("[%d][%d] Nie znaleziono mi ofiary\n", lamport_clock, rank);
 				}
+				pthread_mutex_unlock(&lamport_clock_mutex);
 			}
 			for (int i = 0; i < size; i++)
 			{
@@ -175,7 +187,9 @@ void mainLoop()
 
 			changeState(ITS_OVER);
 
-			printf("[%d] Wychodze z sekcji krytycznej\n\n", rank);
+			pthread_mutex_lock(&lamport_clock_mutex);
+			printf("[%d][%d] Wychodze z sekcji krytycznej\n\n", rank, lamport_clock);
+			pthread_mutex_unlock(&lamport_clock_mutex);
 
 			// pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
 
@@ -184,7 +198,9 @@ void mainLoop()
 		case ITS_OVER:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
+				pthread_mutex_lock(&lamport_clock_mutex);
+				printf("[%d][%d] Jestem zabojca i mowie Koniec!\n", rank, lamport_clock);
+				pthread_mutex_unlock(&lamport_clock_mutex);
 
 				resetValues();
 
