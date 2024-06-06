@@ -71,6 +71,14 @@ void *startKomWatek(void *ptr)
                 killer_count_local++;
             }
 
+            if (victim_count == size || killer_count == size)
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    sendPacket(pkt, i, BEER_TIME); // wysylanie beer time w razie gdy wylosuja sie role tylko jednego typu
+                }
+            }
+
             // Dodanie procesu do listy studentów
             insert_student(pakiet);
             if (rank != pakiet.src)
