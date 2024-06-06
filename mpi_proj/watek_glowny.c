@@ -41,11 +41,11 @@ void mainLoop()
 			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
 			if (pkt->data == KILLER)
 			{
-				printf("Jestem zabojca(%d) ŁAAAA\n", rank);
+				printf("[%d] Jestem zabojca ŁAAAA\n", rank);
 			}
 			else
 			{
-				printf("Jestem ofiarą(%d).. chu.. sie wylosowalo\n", rank);
+				printf("[%d] Jestem ofiarą.. chu.. sie wylosowalo\n", rank);
 			}
 
 			for (int i = 0; i < size; i++)
@@ -57,7 +57,7 @@ void mainLoop()
 		case VICTIM:
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
-				printf("Jestem ofiara i mowie Koniec!\n");
+				printf("[%d] Jestem ofiara i mowie Koniec!\n", rank);
 
 				resetValues();
 
@@ -68,13 +68,13 @@ void mainLoop()
 			if (ackCount == size - 1)
 			{
 				changeState(WANNAKILL);
-				printf("Wchodze w stan WANNAKILL!\n");
+				printf("[%d] Wchodze w stan WANNAKILL!\n", rank);
 			}
 			break;
 		case WANNAKILL:
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
-				printf("Jestem zabojca i mowie Koniec!\n");
+				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
 
 				resetValues();
 
@@ -101,7 +101,7 @@ void mainLoop()
 			for (int i = 0; i < count; i++)
 			{
 				debug("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
-				printf("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
+				// printf("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
 			}
 
 			if (count > 0)
@@ -127,27 +127,27 @@ void mainLoop()
 				if (victim_found)
 				{ // Sprawdzenie, czy ofiara została znaleziona
 					debug("Paruję się z ofiarą %d\n", victim.src);
-					printf("Paruję się z ofiarą %d\n", victim.src);
+					printf("[%d] Paruję się z ofiarą %d\n", rank, victim.src);
 
 					// Losowanie wyniku starcia
 					double result = (double)rand() / RAND_MAX;
 					if (result > 0.5)
 					{
 						debug("Wygrałem starcie z %d\n", victim.src);
-						printf("Wygrałem starcie z %d\n", victim.src);
+						printf("[%d] Wygrałem starcie z %d\n", rank, victim.src);
 						// Możesz dodać dodatkową logikę dla wygranej
 					}
 					else
 					{
 						debug("Przegrałem starcie z %d\n", victim.src);
-						printf("Przegrałem starcie z %d\n", victim.src);
+						printf("[%d] Przegrałem starcie z %d\n", rank, victim.src);
 						// Możesz dodać dodatkową logikę dla przegranej
 					}
 				}
 				else
 				{
 					debug("Nie znaleziono ofiary\n");
-					printf("Nie znaleziono ofiary\n");
+					printf("[%d] Nie znaleziono mi ofiary\n", rank);
 				}
 			}
 			for (int i = 0; i < size; i++)
@@ -167,7 +167,7 @@ void mainLoop()
 		case ITS_OVER:
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
-				printf("Jestem zabojca i mowie Koniec!\n");
+				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
 
 				resetValues();
 
