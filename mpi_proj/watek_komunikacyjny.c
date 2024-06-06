@@ -100,6 +100,21 @@ void *startKomWatek(void *ptr)
             debug("Otrzymalem THE_END od %d\n", pakiet.src);
             victim_count--;
             killer_count--;
+            for (int i = 0; i < count - 1; i++)
+            {
+                // wziecie pierwszej ofiary z listy
+                if (students_list[i].data == VICTIM)
+                {
+                    victim = students_list[i];
+                    // usuniecie tej ofiary z listy
+                    for (int j = i; j < count; j++)
+                    {
+                        students_list[j] = students_list[j + 1];
+                    }
+                    count--;
+                    break;
+                }
+            }
             break;
         case BEER_TIME:
             // BEER_TIME-specific logic here

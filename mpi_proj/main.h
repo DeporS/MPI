@@ -31,6 +31,7 @@
 #define THE_END 11
 #define BEER_TIME 12
 #define MSG_ROLE 13
+#define SHOT 14
 
 #define ROOT 0
 
