@@ -19,6 +19,7 @@ void resetValues()
 	victim_count_local = 0;
 	killer_count_local = 0;
 	lamport_clock = 0;
+	printf("\n");
 }
 
 void mainLoop()
