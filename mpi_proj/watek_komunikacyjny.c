@@ -3,6 +3,9 @@
 
 pthread_mutex_t student_list_mutex = PTHREAD_MUTEX_INITIALIZER;
 
+int victim_count_local = 0;
+int killer_count_local = 0;
+
 void insert_student(packet_t pakiet)
 {
     // pthread_mutex_lock(&student_list_mutex);
@@ -63,10 +66,12 @@ void *startKomWatek(void *ptr)
             if (pakiet.data == VICTIM)
             {
                 victim_count++;
+                victim_count_local++;
             }
             else
             {
                 killer_count++;
+                killer_count_local++;
             }
 
             // Dodanie procesu do listy studentów
@@ -147,13 +152,13 @@ void *startKomWatek(void *ptr)
             }
 
             THE_END_counter++;
-            if (THE_END_counter == min(killer_count, victim_count))
+            if (THE_END_counter == min(killer_count_local, victim_count_local))
             {
                 for (int i = 0; i < size; i++)
                 {
                     if (i != rank)
                     {
-                        sendPacket(0, i, BEER_TIME); // Wysyłanie checi bitwy do wszystkich
+                        sendPacket(0, i, BEER_TIME); // beer time
                     }
                 }
             }
