@@ -109,7 +109,7 @@ void mainLoop()
 
 			if (count > 0)
 			{
-				int victim_count = 0;
+				int victim_found = 0;
 				packet_t victim;
 				for (int i = 0; i < count - 1; i++)
 				{
@@ -117,7 +117,7 @@ void mainLoop()
 					if (students_list[i].data == VICTIM)
 					{
 						victim = students_list[i];
-						victim_count = 1;
+						victim_found = 1;
 						// usuniecie tej ofiary z listy
 						for (int j = i; j < count; j++)
 						{
