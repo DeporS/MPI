@@ -105,7 +105,6 @@ void *startKomWatek(void *ptr)
                 // wziecie pierwszej ofiary z listy
                 if (students_list[i].data == VICTIM)
                 {
-                    victim = students_list[i];
                     // usuniecie tej ofiary z listy
                     for (int j = i; j < count; j++)
                     {
