@@ -14,9 +14,9 @@ void mainLoop()
 		{
 		case REST:
 			ackCount = 0;
-			packet_t students_list[100]; // Lista studentów
-			count = 0;					 // Licznik dodanych studentów
-			ack_kill_count = 0;			 // Liczba otrzymanych ACK_KILL
+			memset(students_list, 0, sizeof(students_list)); // zerowanie wartosci listy
+			count = 0;										 // Licznik dodanych studentów
+			ack_kill_count = 0;								 // Liczba otrzymanych ACK_KILL
 			victim_count = 0;
 			killer_count = 0;
 			is_killing = FALSE;
