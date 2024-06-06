@@ -86,16 +86,14 @@ void mainLoop()
 			}
 			break;
 		case WANNAKILL:
-			packet_t *pkt = malloc(sizeof(packet_t));
-			pkt->data = rank;
 			for (int i = 0; i < size; i++)
 			{
 				if (i != rank)
 				{
-					sendPacket(pkt, i, REQ_KILL); // Wysyłanie roli do wszystkich
+					sendPacket(0, i, REQ_KILL); // Wysyłanie roli do wszystkich
 				}
 			}
-			free(pkt);
+
 			break;
 		case KILLING:
 			// KILLING-specific logic here
