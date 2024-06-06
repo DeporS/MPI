@@ -2,6 +2,8 @@
 #include "watek_glowny.h"
 #include <time.h>
 
+pthread_barrier_t barrier;
+
 void resetValues()
 {
 	// zerowanie wartosci dla nowego cyklu
@@ -20,6 +22,9 @@ void resetValues()
 
 void mainLoop()
 {
+	// Inicjalizacja bariery
+	pthread_barrier_init(&barrier, NULL, size);
+
 	srandom(time(NULL) + rank);
 	int tag;
 	int perc;
@@ -29,7 +34,6 @@ void mainLoop()
 		switch (stan)
 		{
 		case REST:
-			resetValues();
 
 			perc = random() % 100;
 			packet_t *pkt = malloc(sizeof(packet_t));
@@ -54,6 +58,11 @@ void mainLoop()
 			{
 				printf("Jestem ofiara i mowie Koniec!\n");
 
+				// Synchronizacja wszystkich procesów na barierze
+				pthread_barrier_wait(&barrier);
+
+				resetValues();
+
 				changeState(REST);
 			}
 			break;
@@ -69,7 +78,14 @@ void mainLoop()
 			{
 				printf("Jestem zabojca i mowie Koniec!\n");
 
+				// Synchronizacja wszystkich procesów na barierze
+				pthread_barrier_wait(&barrier);
+
+				resetValues();
+
 				changeState(REST);
+
+				break;
 			}
 			for (int i = 0; i < size; i++)
 			{
@@ -157,6 +173,11 @@ void mainLoop()
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Jestem zabojca i mowie Koniec!\n");
+
+				// Synchronizacja wszystkich procesów na barierze
+				pthread_barrier_wait(&barrier);
+
+				resetValues();
 
 				changeState(REST);
 			}
