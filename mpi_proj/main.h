@@ -52,8 +52,8 @@ extern packet_t students_list[100]; // Lista studentów
 extern int is_killing;
 extern int THE_END_counter;
 extern int beer_counter;
-extern int victim_count_local = 0;
-extern int killer_count_local = 0;
+extern int victim_count_local;
+extern int killer_count_local;
 
 extern pthread_t threadKom;
 
