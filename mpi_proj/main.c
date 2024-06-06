@@ -20,6 +20,8 @@ int ack_kill_count = 0;      // Liczba otrzymanych ACK_KILL
 int victim_count = 0;
 int killer_count = 0;
 int is_killing = FALSE;
+int THE_END_counter = 0;
+int beer_counter = 0;
 /*
  * Każdy proces ma dwa wątki - główny i komunikacyjny
  * w plikach, odpowiednio, watek_glowny.c oraz (siurpryza) watek_komunikacyjny.c

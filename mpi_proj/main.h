@@ -50,6 +50,8 @@ extern int victim_count;
 extern int killer_count;
 extern packet_t students_list[100]; // Lista studentów
 extern int is_killing;
+extern int THE_END_counter;
+extern int beer_counter;
 
 extern pthread_t threadKom;
 

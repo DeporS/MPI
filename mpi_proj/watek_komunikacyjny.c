@@ -145,9 +145,22 @@ void *startKomWatek(void *ptr)
                     break;
                 }
             }
+
+            THE_END_counter++;
+            if (THE_END_counter == min(killer_count, victim_count))
+            {
+                for (int i = 0; i < size; i++)
+                {
+                    if (i != rank)
+                    {
+                        sendPacket(0, i, BEER_TIME); // Wysyłanie checi bitwy do wszystkich
+                    }
+                }
+            }
+
             break;
         case BEER_TIME:
-            // BEER_TIME-specific logic here
+            beer_counter++;
             break;
         default:
             break;
