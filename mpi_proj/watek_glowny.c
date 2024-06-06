@@ -13,6 +13,15 @@ void mainLoop()
 		switch (stan)
 		{
 		case REST:
+			ackCount = 0;
+			packet_t students_list[100]; // Lista studentów
+			count = 0;					 // Licznik dodanych studentów
+			ack_kill_count = 0;			 // Liczba otrzymanych ACK_KILL
+			victim_count = 0;
+			killer_count = 0;
+			is_killing = FALSE;
+			THE_END_counter = 0;
+			beer_counter = 0;
 			perc = random() % 100;
 			packet_t *pkt = malloc(sizeof(packet_t));
 			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
@@ -35,6 +44,8 @@ void mainLoop()
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Jestem ofiara i mowie Koniec!\n");
+
+				changeState(REST);
 			}
 			break;
 		case KILLER:
@@ -130,6 +141,7 @@ void mainLoop()
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Jestem zabojca i mowie Koniec!\n");
+				changeState(REST);
 			}
 			break;
 		default:
