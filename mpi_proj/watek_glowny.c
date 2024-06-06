@@ -56,7 +56,7 @@ void mainLoop()
 			break;
 		case KILLING:
 			// Wchodzenie do sekcji krytycznej
-			// pthread_mutex_lock(&student_list_mutex); // Blokowanie dostępu do listy studentow
+			pthread_mutex_lock(&student_list_mutex); // Blokowanie dostępu do listy studentow
 
 			debug("Zawartość students_list przed KILLING:\n");
 			// printf("Zawartość students_list przed KILLING:\n");
@@ -122,7 +122,7 @@ void mainLoop()
 
 			changeState(ITS_OVER);
 
-			// pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
+			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
 
 			break;
 
