@@ -75,7 +75,7 @@ void *startKomWatek(void *ptr)
             {
                 for (int i = 0; i < size; i++)
                 {
-                    sendPacket(pkt, i, BEER_TIME); // wysylanie beer time w razie gdy wylosuja sie role tylko jednego typu
+                    sendPacket(0, i, BEER_TIME); // wysylanie beer time w razie gdy wylosuja sie role tylko jednego typu
                 }
             }
 
