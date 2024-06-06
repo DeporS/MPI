@@ -17,8 +17,8 @@ void resetValues()
 	is_killing = FALSE;
 	THE_END_counter = 0;
 	beer_counter = 0;
-	victim_count_local = 0;
-	killer_count_local = 0;
+	victim_count_const = 0;
+	killer_count_const = 0;
 	// lamport_clock = 0;
 }
 

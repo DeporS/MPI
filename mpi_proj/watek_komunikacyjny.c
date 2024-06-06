@@ -63,12 +63,12 @@ void *startKomWatek(void *ptr)
             if (pakiet.data == VICTIM)
             {
                 victim_count++;
-                victim_count_local++;
+                victim_count_const++;
             }
             else
             {
                 killer_count++;
-                killer_count_local++;
+                killer_count_const++;
             }
 
             if (victim_count == size || killer_count == size)
@@ -111,7 +111,7 @@ void *startKomWatek(void *ptr)
                 }
             }
 
-            if ((ack_kill_count >= size - 1 - victim_count_local) && (min(victim_count, killer_count) != 0) && (first_killer == rank) && (!is_killing))
+            if ((ack_kill_count >= size - 1 - victim_count_const) && (min(victim_count, killer_count) != 0) && (first_killer == rank) && (!is_killing))
             {
                 is_killing = TRUE;
                 changeState(KILLING);
@@ -159,7 +159,7 @@ void *startKomWatek(void *ptr)
 
             // wszystkie procesy ktore nie byly w sekcji spelnia ten warunek, dlatego beer_counter na koncu bedzie rowny size - min(killer_count_local, victim_count_local)
             THE_END_counter++;
-            if (THE_END_counter == min(killer_count_local, victim_count_local))
+            if (THE_END_counter == min(killer_count_const, victim_count_const))
             {
                 for (int i = 0; i < size; i++)
                 {

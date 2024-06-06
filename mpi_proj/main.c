@@ -22,8 +22,8 @@ int killer_count = 0;
 int is_killing = FALSE;
 int THE_END_counter = 0;
 int beer_counter = 0;
-int victim_count_local = 0;
-int killer_count_local = 0;
+int victim_count_const = 0;
+int killer_count_const = 0;
 /*
  * Każdy proces ma dwa wątki - główny i komunikacyjny
  * w plikach, odpowiednio, watek_glowny.c oraz (siurpryza) watek_komunikacyjny.c
