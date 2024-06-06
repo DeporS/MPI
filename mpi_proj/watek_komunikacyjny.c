@@ -94,7 +94,7 @@ void *startKomWatek(void *ptr)
 
             // odczytanie pierwszego zadania od killera w liscie
             int first_killer = 100;
-            for (int i = 0; i < victim_count + killer_count - 1; i++)
+            for (int i = 0; i < victim_count + killer_count; i++)
             {
                 if (students_list[i].data == KILLER)
                 {
