@@ -158,19 +158,17 @@ void *startKomWatek(void *ptr)
                 printf("PIWO!\n");
                 for (int i = 0; i < size; i++)
                 {
-                    if (i != rank)
-                    {
-                        sendPacket(0, i, BEER_TIME); // beer time
-                    }
+                    sendPacket(0, i, BEER_TIME); // beer time
                 }
             }
-
-            break;
-        case BEER_TIME:
-            beer_counter++;
-            break;
-        default:
-            break;
         }
+
+        break;
+    case BEER_TIME:
+        beer_counter++;
+        break;
+    default:
+        break;
     }
+}
 }
