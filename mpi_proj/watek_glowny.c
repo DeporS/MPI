@@ -111,11 +111,11 @@ void mainLoop()
 			pthread_mutex_lock(&student_list_mutex); // Blokowanie dostępu do listy studentow
 
 			debug("Zawartość students_list przed KILLING:\n");
-			printf("Zawartość students_list przed KILLING:\n");
+			// printf("Zawartość students_list przed KILLING:\n");
 			for (int i = 0; i < count; i++)
 			{
 				debug("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
-				printf("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
+				// printf("students_list[%d].src = %d, students_list[%d].data = %d\n", i, students_list[i].src, i, students_list[i].data);
 			}
 
 			if (count > 0)
