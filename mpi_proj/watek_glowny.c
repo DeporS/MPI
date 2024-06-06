@@ -57,7 +57,7 @@ void mainLoop()
 		case VICTIM:
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
-				printf("[%d] Jestem ofiara i mowie Koniec! piwa: \n", rank, beer_counter);
+				printf("[%d] Jestem ofiara i mowie Koniec! piwa: %d\n", rank, beer_counter);
 
 				resetValues();
 
@@ -74,7 +74,7 @@ void mainLoop()
 		case WANNAKILL:
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
-				printf("[%d] Jestem zabojca i mowie Koniec! piwa: \n", rank, beer_counter);
+				printf("[%d] Jestem zabojca i mowie Koniec! piwa: %d\n", rank, beer_counter);
 
 				resetValues();
 
