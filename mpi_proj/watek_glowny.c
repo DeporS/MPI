@@ -58,9 +58,6 @@ void mainLoop()
 			{
 				printf("Jestem ofiara i mowie Koniec!\n");
 
-				// Synchronizacja wszystkich procesów na barierze
-				pthread_barrier_wait(&barrier);
-
 				resetValues();
 
 				changeState(REST);
@@ -77,9 +74,6 @@ void mainLoop()
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Jestem zabojca i mowie Koniec!\n");
-
-				// Synchronizacja wszystkich procesów na barierze
-				pthread_barrier_wait(&barrier);
 
 				resetValues();
 
@@ -173,9 +167,6 @@ void mainLoop()
 			if (beer_counter == size - min(victim_count_local, killer_count_local))
 			{
 				printf("Jestem zabojca i mowie Koniec!\n");
-
-				// Synchronizacja wszystkich procesów na barierze
-				pthread_barrier_wait(&barrier);
 
 				resetValues();
 
