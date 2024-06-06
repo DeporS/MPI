@@ -66,9 +66,9 @@ void mainLoop()
 			}
 			else
 			{
-				lock(beer_mutex);
-				lock(beer_mutex);
-				unlock(beer_mutex);
+				pthread_mutex_lock(beer_mutex);
+				pthread_mutex_lock(beer_mutex);
+				pthread_mutex_unlock(beer_mutex);
 			}
 			break;
 		case KILLER:
@@ -100,9 +100,9 @@ void mainLoop()
 			}
 			else
 			{
-				lock(beer_mutex);
-				lock(beer_mutex);
-				unlock(beer_mutex);
+				pthread_mutex_lock(beer_mutex);
+				pthread_mutex_lock(beer_mutex);
+				pthread_mutex_unlock(beer_mutex);
 			}
 
 			break;
@@ -192,9 +192,9 @@ void mainLoop()
 			}
 			else
 			{
-				lock(beer_mutex);
-				lock(beer_mutex);
-				unlock(beer_mutex);
+				pthread_mutex_lock(beer_mutex);
+				pthread_mutex_lock(beer_mutex);
+				pthread_mutex_unlock(beer_mutex);
 			}
 			break;
 		default:
