@@ -41,11 +41,11 @@ void mainLoop()
 			pkt->data = (perc < 50) ? KILLER : VICTIM; // Losowanie roli
 			if (pkt->data == KILLER)
 			{
-				printf("[%d] Jestem zabojca ŁAAAA\n", rank);
+				printf("[%d] Jestem zabojca!!\n", rank);
 			}
 			else
 			{
-				printf("[%d] Jestem ofiarą.. chu.. sie wylosowalo\n", rank);
+				printf("[%d] Jestem ofiarą.. Trudne sie wylosowalo\n", rank);
 			}
 
 			for (int i = 0; i < size; i++)
@@ -57,7 +57,7 @@ void mainLoop()
 		case VICTIM:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem ofiara i mowie Koniec! piwa: %d\n", rank, beer_counter);
+				printf("[%d] Jestem ofiara i mowie Koniec! %d\n", rank);
 
 				resetValues();
 
@@ -74,7 +74,7 @@ void mainLoop()
 		case WANNAKILL:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem zabojca i mowie Koniec! piwa: %d\n", rank, beer_counter);
+				printf("[%d] Jestem zabojca i mowie Koniec! %d\n", rank);
 
 				resetValues();
 
@@ -160,7 +160,9 @@ void mainLoop()
 
 			changeState(ITS_OVER);
 
-			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów if (beer_counter == size - min(victim_count_local, killer_count_local))
+			printf("[%d] Wychodze z sekcji krytycznej\n", rank);
+
+			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
 
 			break;
 
