@@ -161,14 +161,13 @@ void *startKomWatek(void *ptr)
                     sendPacket(0, i, BEER_TIME); // beer time
                 }
             }
-        }
 
-        break;
-    case BEER_TIME:
-        beer_counter++;
-        break;
-    default:
-        break;
+            break;
+        case BEER_TIME:
+            beer_counter++;
+            break;
+        default:
+            break;
+        }
     }
-}
 }
