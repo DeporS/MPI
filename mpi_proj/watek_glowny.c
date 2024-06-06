@@ -116,10 +116,10 @@ void mainLoop()
 						victim = students_list[i];
 						victim_found = 1;
 						// usuniecie tej ofiary z listy
-						for (int j = i; j < count; j++)
-						{
-							students_list[j] = students_list[j + 1];
-						}
+						// for (int j = i; j < count; j++)
+						// {
+						// 	students_list[j] = students_list[j + 1];
+						// }
 						count--;
 						break;
 					}

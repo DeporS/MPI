@@ -157,6 +157,7 @@ void *startKomWatek(void *ptr)
                 }
             }
 
+            // wszystkie procesy ktore nie byly w sekcji spelnia ten warunek, dlatego beer_counter na koncu bedzie rowny size - min(killer_count_local, victim_count_local)
             THE_END_counter++;
             if (THE_END_counter == min(killer_count_local, victim_count_local))
             {
