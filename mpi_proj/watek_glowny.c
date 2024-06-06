@@ -18,6 +18,7 @@ void resetValues()
 	beer_counter = 0;
 	victim_count_local = 0;
 	killer_count_local = 0;
+	lamport_clock = 0;
 }
 
 void mainLoop()
