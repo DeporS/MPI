@@ -146,8 +146,6 @@ void mainLoop()
 
 			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
 
-			// Po zakończeniu sekcji krytycznej zmiana stanu na inny, np. REST
-			changeState(REST);
 			break;
 
 		case ITS_OVER:
