@@ -3,7 +3,7 @@
 
 void mainLoop()
 {
-	srandom(rank);
+	srandom(NULL);
 	int tag;
 	int perc;
 
@@ -98,7 +98,7 @@ void mainLoop()
 			{
 				if (i != rank)
 				{
-					sendPacket(0, i, REQ_KILL); // Wysyłanie roli do wszystkich
+					sendPacket(0, i, REQ_KILL); // Wysyłanie checi bitwy do wszystkich
 				}
 			}
 
