@@ -19,7 +19,6 @@ void resetValues()
 	victim_count_local = 0;
 	killer_count_local = 0;
 	lamport_clock = 0;
-	printf("\n");
 }
 
 void mainLoop()
@@ -58,7 +57,7 @@ void mainLoop()
 		case VICTIM:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem ofiara i mowie Koniec!\n", rank);
+				printf("[%d] Jestem ofiara i mowie Koniec!\n\n", rank);
 
 				resetValues();
 
@@ -75,7 +74,7 @@ void mainLoop()
 		case WANNAKILL:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
+				printf("[%d] Jestem zabojca i mowie Koniec!\n\n", rank);
 
 				resetValues();
 
@@ -170,7 +169,7 @@ void mainLoop()
 		case ITS_OVER:
 			if (beer_counter == size - 1)
 			{
-				printf("[%d] Jestem zabojca i mowie Koniec!\n", rank);
+				printf("[%d] Jestem zabojca i mowie Koniec!\n\n", rank);
 
 				resetValues();
 
