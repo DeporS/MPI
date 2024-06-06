@@ -18,7 +18,7 @@ packet_t students_list[100]; // Lista studentów
 int count = 0;               // Licznik dodanych studentów
 int ack_kill_count = 0;      // Liczba otrzymanych ACK_KILL
 int victim_count = 0;
-
+int killer_count = 0;
 /*
  * Każdy proces ma dwa wątki - główny i komunikacyjny
  * w plikach, odpowiednio, watek_glowny.c oraz (siurpryza) watek_komunikacyjny.c

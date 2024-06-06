@@ -61,7 +61,13 @@ void *startKomWatek(void *ptr)
             debug("Otrzymalem rolę %s od %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src);
             // printf("Otrzymalem rolę %s od %d z zegarem %d\n", (pakiet.data == KILLER) ? "KILLER" : "VICTIM", pakiet.src, pakiet.ts);
             if (pakiet.data == VICTIM)
+            {
                 victim_count++;
+            }
+            else
+            {
+                killer_count++;
+            }
 
             // Dodanie procesu do listy studentów
             insert_student(pakiet);
@@ -83,7 +89,7 @@ void *startKomWatek(void *ptr)
         case ACK_KILL:
             debug("Otrzymalem ACK_KILL od %d\n", pakiet.src);
             ack_kill_count++;
-            if (ack_kill_count == size - 1 - victim_count)
+            if ((ack_kill_count == size - 1 - victim_count) && min(victim_count, killer_count) != 0)
             {
                 changeState(KILLING);
                 debug("Przechodzę w stan KILLING\n");
@@ -91,7 +97,9 @@ void *startKomWatek(void *ptr)
             }
             break;
         case THE_END:
-            // THE_END-specific logic here
+            debug("Otrzymalem THE_END od %d\n", pakiet.src);
+            victim_count--;
+            killer_count--;
             break;
         case BEER_TIME:
             // BEER_TIME-specific logic here

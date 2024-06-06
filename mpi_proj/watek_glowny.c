@@ -84,7 +84,10 @@ void mainLoop()
 			changeState((pkt->data == KILLER) ? KILLER : VICTIM); // Zmiana stanu na KILLER lub VICTIM
 			break;
 		case VICTIM:
-			// Victim-specific logic here
+			if (min(killer_count, victim_count) == 0)
+			{
+				printf("BEER TIME!\n");
+			}
 			break;
 		case KILLER:
 			if (ackCount == size - 1)
@@ -153,13 +156,25 @@ void mainLoop()
 					printf("Nie znaleziono ofiary\n");
 				}
 			}
+			for (int i = 0; i < size; i++)
+			{
+				if (i != rank)
+				{
+					sendPacket(0, i, THE_END); // wysylanie wiadomosci o koncu walki
+				}
+			}
+
+			changeState(ITS_OVER);
 
 			pthread_mutex_unlock(&student_list_mutex); // Odblokowanie dostępu do listy studentów
 
 			break;
 
 		case ITS_OVER:
-			// ITS_OVER-specific logic here
+			if (min(killer_count, victim_count) == 0)
+			{
+				printf("BEER TIME!\n");
+			}
 			break;
 		default:
 			break;
